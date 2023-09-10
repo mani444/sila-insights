@@ -4,6 +4,8 @@ import morgan from 'morgan';
 import ConnectDB from './config/db.js';
 import errorHandler from './middlewares/errorHandler.js';
 import cors from 'cors';
+import authRoutes from './routes/auth.js';
+
 dotenv.config();
 
 ConnectDB();
@@ -14,6 +16,7 @@ app.use(express.json());
 
 app.use(morgan('dev'));
 app.use(cors());
+app.use('/api/auth', authRoutes);
 app.use(errorHandler);
 
 const port = process.env.PORT || 5000;
