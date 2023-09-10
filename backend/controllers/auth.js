@@ -20,17 +20,19 @@ export const login = asyncHandler(async (req, res) => {
     _id: user._id,
     name: user.name,
     email: user.email,
+    userType: user.userType,
     token: user.CreateToken(),
   });
 });
 
 export const register = asyncHandler(async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, userType } = req.body;
 
   const user = new User({
     email,
     name,
     password,
+    userType,
   });
   const createdUser = await user.save();
 
@@ -39,6 +41,7 @@ export const register = asyncHandler(async (req, res) => {
     _id: createdUser._id,
     name: createdUser.name,
     email: createdUser.email,
+    userType: createdUser.userType,
     token: createdUser.CreateToken(),
   });
 });

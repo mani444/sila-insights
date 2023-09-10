@@ -19,12 +19,13 @@ export const loginUser = createAsyncThunk(
 
 export const registerUser = createAsyncThunk(
   "auth/registerUser",
-  async ({ name, email, password }, thunkAPI) => {
+  async ({ name, email, password, userType }, thunkAPI) => {
     try {
       const { data } = await axiosIns.post(`/api/auth/register`, {
         name,
         email,
         password,
+        userType,
       });
       localStorage.setItem('userInfo', JSON.stringify(data));
       return data

@@ -1,9 +1,17 @@
-import React from 'react'
+import { useSelector } from 'react-redux';
+import { authSelector } from '../../redux/auth/authSlice';
 
 const Dashboard = () => {
+  const { userInfo } = useSelector(authSelector);
+  const userType = userInfo?.userType;
+
   return (
-    <div>Dashboard</div>
-  )
+    userType === "tech" ? (
+      <div>Tech Dashboard</div>
+    ) : (
+      <div>Sales Dashboard</div>
+    )
+  );
 }
 
 export default Dashboard
