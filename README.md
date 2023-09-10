@@ -37,5 +37,5 @@ Before getting started, make sure you have the following software installed on y
 This will run your application in your default browser.
 
 ## Deployment
-To deploy your application, you can use a Vercel.
+To deploy your application, you can use Vercel.
 
