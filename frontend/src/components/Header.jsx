@@ -19,6 +19,7 @@ const Header = () => {
         <Navbar.Brand>
           Sila Insights
         </Navbar.Brand>
+        <Navbar.Toggle aria-controls='responsive-navbar-nav' />
         <Nav className='ms-auto'>
           {userInfo ? (
             <NavDropdown title={userInfo.name} id='collasible-nav-dropdown'>

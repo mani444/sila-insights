@@ -43,8 +43,12 @@ const authSlice = createSlice({
         [loginUser.fulfilled]: (state, { payload }) => {
             authSlice.caseReducers.setUserInfo(state, { payload })
         },
-        [loginUser.rejected]: (state, { payload }) => {
-            authSlice.caseReducers.setError(state, { payload })
+        [loginUser.rejected]: (state, action) => {
+            if (action.payload) {
+                authSlice.caseReducers.setError(state, { payload: action.payload.message })
+            } else {
+                authSlice.caseReducers.setError(state, { payload: action.error.message })
+            }
         },
         [registerUser.pending]: (state) => {
             authSlice.caseReducers.setLoading(state);
@@ -52,8 +56,12 @@ const authSlice = createSlice({
         [registerUser.fulfilled]: (state, { payload }) => {
             authSlice.caseReducers.setUserInfo(state, { payload })
         },
-        [registerUser.rejected]: (state, { payload }) => {
-            authSlice.caseReducers.setError(state, { payload })
+        [registerUser.rejected]: (state, action) => {
+            if (action.payload) {
+                authSlice.caseReducers.setError(state, { payload: action.payload.message })
+            } else {
+                authSlice.caseReducers.setError(state, { payload: action.error.message })
+            }
         },
     },
 })

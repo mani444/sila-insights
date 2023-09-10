@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import { Button, Form, Row, Col } from 'react-bootstrap';
+import { Button, Form, Row, Col, Dropdown } from 'react-bootstrap';
 import FormContainer from '../../components/FormContainer';
 import { useDispatch, useSelector } from 'react-redux';
 import { registerUser } from '../../redux/auth/authThunk';
@@ -13,6 +13,7 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState(null);
+  const [userType, setUserType] = useState('');
 
   const { loading, error, userInfo } = useSelector(authSelector);
   const dispatch = useDispatch();
@@ -23,11 +24,14 @@ const Register = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+
     if (password !== confirmPassword) {
       setMessage('Password not match');
+    } else if (userType === '') {
+      setMessage('Please select a User Type');
     } else {
       setMessage(null);
-      dispatch(registerUser({ name, email, password }));
+      dispatch(registerUser({ name, email, password, userType: userType.toLowerCase() }));
     }
   };
 
@@ -92,6 +96,18 @@ const Register = () => {
               }
             }}
           ></Form.Control>
+        </Form.Group>
+        <Form.Group className="mb-2">
+          <Form.Label>User Type</Form.Label>
+          <Dropdown onSelect={(selectedUserType) => setUserType(selectedUserType)}>
+            <Dropdown.Toggle variant="light">
+              {userType || 'Select User Type'}
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              <Dropdown.Item eventKey="Tech">Tech</Dropdown.Item>
+              <Dropdown.Item eventKey="Sales">Sales</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         </Form.Group>
         <div className='d-grid'>
           <Button type='submit' className='btn btn-primary mt-3'>
