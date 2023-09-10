@@ -1,8 +1,8 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes } from 'react-router-dom';
 import Header from './components/Header';
 import { Container } from 'react-bootstrap';
-import Login from './modules/Login/Login';
+import appRoutes from "./routes/index";
 
 const App = () => {
   return (
@@ -11,8 +11,7 @@ const App = () => {
       <main className='app-main py-3'>
         <Container>
           <Routes>
-            <Route path='/' element={<Login />} />
-            <Route path='/login' element={<Login />} />
+            {appRoutes}
           </Routes>
         </Container>
       </main>
